@@ -6,15 +6,15 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
 
     const metadataURIs = [
-        "ipfs://QmUeDuX3QEbwzADdeDgD3soDShxjn6crfgWRgrLSi4d9w2",
-        "ipfs://QmWqXXBHdBK4HZ6MNuvdFZ2E7ecbqHDvWnYAWAngZ95RpC",
-        "ipfs://QmaaTSbBcrgEKd2v5P4Wkkmj4ry5Trc9kSsMdvVCxc2hG5",
-        "ipfs://QmQdY8CTYFpZgTVjo3K4FDtnmpRFfVb9Dt1ZVFK5KVwuoX",
-        "ipfs://QmXvdP5sZMQ9wBBHRSjg7SmKDpYgv4DaQrxN6292iLmPDh"
+        "ipfs://<Enter your token metadata URI>",
+        "ipfs://<Enter your token metadata URI>",
+        "ipfs://<Enter your token metadata URI>",
+        "ipfs://<Enter your token metadata URI>",
+        "ipfs://<Enter your token metadata URI>"
     ];
 
     
-        const deployedContractAddress = process.env.CONTRACT_ADDR; //change with sepolia
+        const deployedContractAddress = process.env.CONTRACT_ADDR; 
     
         // Get the ABI from the artifacts
         const MyCollectionArtifact = require('../artifacts/contracts/MyCollection.sol/MyCollection.json');
