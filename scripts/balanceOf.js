@@ -3,9 +3,9 @@ const { ethers } = require("hardhat");
 async function main() {
     const [deployer] = await ethers.getSigners();
     const MyNFTCollection = await ethers.getContractFactory("MyCollection");
-    const myNFTCollection = await MyNFTCollection.attach(process.env.CONTRACT_ADDR);
+    const myNFTCollection = await MyNFTCollection.attach("CONTRACT_ADDRESS_AMOY"); //Address of Contract on Amoy testnet
 
-    const balance = await myNFTCollection.balanceOf("0xc365eDFC968cCb5eb19704337e6e7E3724fd1ddd");
+    const balance = await myNFTCollection.balanceOf("<RECIPIENT_ADDRESS>"); //Address of recipient on Amoy Testnet
     console.log(`Balance of recipient: ${balance.toString()}`);
 }
 
