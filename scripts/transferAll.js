@@ -5,9 +5,9 @@ require('dotenv').config();
 
 const contractAddress = process.env.CONTRACT_ADDR;
 const contractABI = tokenContractJSON.abi;
-const fxERC721RootAddress = "0x421DbB7B5dFCb112D7a13944DeFB80b28eC5D22C";
-const walletAddress = "0xbeEF51912Bf30B21a361a953978790645cF680d7";
-const toAddress = "0xc365eDFC968cCb5eb19704337e6e7E3724fd1ddd";
+const fxERC721RootAddress = "0x421DbB7B5dFCb112D7a13944DeFB80b28eC5D22C"; //Root contract address on sepolia testnet
+const walletAddress = "<WALLET_ADDRESS>"; //Address to which Tokens are minted
+const toAddress = "<RECIPIENT_ADDRESS>"; //Recipient address 
 
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
@@ -24,7 +24,10 @@ async function main() {
             await myCollection.approve(fxERC721RootAddress, tokenIds[i]);
             console.log(`Approved token ${tokenIds[i]} for transfer`);
 
-            // Transfer the NFT to the Bridge using safeTransferFrom
+            // Need to use deposit function after approving but as there is no such function for now
+            // I used transferFrom.
+
+            // Transfer the NFT to the Bridge using transferFrom
             await fxContract.transferFrom( walletAddress,toAddress, tokenIds[i]);
             
             console.log(`Transferred token ${tokenIds[i]} to the bridge`);
