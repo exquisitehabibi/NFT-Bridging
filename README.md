@@ -37,6 +37,7 @@ To run this program, Gitpod (https://www.gitpod.io/), VSCode or any ide of your 
    - Note down the IPFS URLs for each image for use in the smart contract.
 
 4. **Deploy ERC721 or ERC1155 Contract**:
+   - Note: Remember to create the .env file containing all the required URLs, Addresses and Private Keys.
    - Deploy the smart contract to the Sepolia Ethereum Testnet:
      ```sh
      npx hardhat run scripts/deploy.js --network sepolia
