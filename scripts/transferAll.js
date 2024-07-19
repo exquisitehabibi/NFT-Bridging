@@ -5,9 +5,8 @@ require('dotenv').config();
 
 const contractAddress = process.env.CONTRACT_ADDR;
 const contractABI = tokenContractJSON.abi;
-const fxERC721RootAddress = "0x421DbB7B5dFCb112D7a13944DeFB80b28eC5D22C"; //Root contract address on sepolia testnet
-const walletAddress = "<WALLET_ADDRESS>"; //Address to which Tokens are minted
-const toAddress = "<RECIPIENT_ADDRESS>"; //Recipient address 
+const fxERC721RootAddress = "0x9E688939Cb5d484e401933D850207D6750852053";
+const walletAddress = "<RECIPIENT_ADDRESS>";
 
 async function main() {
     const [deployer] = await hre.ethers.getSigners();
@@ -24,13 +23,10 @@ async function main() {
             await myCollection.approve(fxERC721RootAddress, tokenIds[i]);
             console.log(`Approved token ${tokenIds[i]} for transfer`);
 
-            // Need to use deposit function after approving but as there is no such function for now
-            // I used transferFrom.
-
-            // Transfer the NFT to the Bridge using transferFrom
-            await fxContract.transferFrom( walletAddress,toAddress, tokenIds[i]);
-            
+            // Deposit Nfts to Bridge contract from where they will be deposited to amoy
+            await fxContract.deposit(contractAddress, walletAddress,tokenIds[i], "0x6554"  );
             console.log(`Transferred token ${tokenIds[i]} to the bridge`);
+
         } catch (error) {
             console.error(`Error processing token ${tokenIds[i]}: ${error.message}`);
         }
