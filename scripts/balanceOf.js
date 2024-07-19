@@ -1,11 +1,18 @@
 const { ethers } = require("hardhat");
+const tokenContractJSON = require("../artifacts/contracts/MyCollection.sol/MyCollection.json");
+const contractAddress = "CONTRACT_ADDRESS_AMOY";
+const tokenABI = tokenContractJSON.abi;
+const walletAddress = "<RECIPIENT_ADDRESS>";
 
 async function main() {
-    const [deployer] = await ethers.getSigners();
-    const MyNFTCollection = await ethers.getContractFactory("MyCollection");
-    const myNFTCollection = await MyNFTCollection.attach("CONTRACT_ADDRESS_AMOY"); //Address of Contract on Amoy testnet
+    // Get the provider and signer
+    const provider = ethers.getDefaultProvider(process.env.AMOY_URL); // Ensure this is the correct network
 
-    const balance = await myNFTCollection.balanceOf("<RECIPIENT_ADDRESS>"); //Address of recipient on Amoy Testnet
+    // Attach the contract
+    const myNFTCollection = new ethers.Contract(contractAddress, tokenABI, provider);
+
+    // Call the balanceOf function
+    const balance = await myNFTCollection.balanceOf(walletAddress);
     console.log(`Balance of recipient: ${balance.toString()}`);
 }
 
